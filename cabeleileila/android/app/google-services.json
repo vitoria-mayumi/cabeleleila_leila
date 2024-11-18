@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "956603651264",
+    "project_id": "cabeleleilaleila-7a93c",
+    "storage_bucket": "cabeleleilaleila-7a93c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956603651264:android:3fa18b5a8c7940c17c8925",
+        "android_client_info": {
+          "package_name": "com.example.cabeleileila"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM93uqZPDDSOKcpCHCcwyjqDSOX3YrUjE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
