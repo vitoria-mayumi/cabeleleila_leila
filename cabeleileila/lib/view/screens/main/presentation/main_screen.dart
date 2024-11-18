@@ -1,5 +1,6 @@
 import 'package:cabeleileila/constants/colors/colors_constants.dart';
 import 'package:cabeleileila/constants/enums/button_enums.dart';
+import 'package:cabeleileila/view/screens/scheduling/presentation/add_scheduling_screen.dart';
 import 'package:cabeleileila/view/widgets/buttonWidget/presentation/button_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -24,17 +25,16 @@ class _MainScreenState extends State<MainScreen> {
             styleType: ButtonStyleType.fill,
             color: ButtonColor.primary,
             startIcon: Icons.add_circle_outline,
+            action: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AddSchedulingScreen()));
+            },
           ),
           ButtonWidget(
             text: "Filtrar por data",
             styleType: ButtonStyleType.outline,
             color: ButtonColor.secondary,
             endIcon: Icons.calendar_month,
-          ),
-          ListView.builder(
-            itemBuilder: (context, index) {
-              return Card();
-            },
           ),
         ],
       ),
