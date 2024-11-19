@@ -1,9 +1,11 @@
-import 'package:cabeleileila/constants/colors/colors_constants.dart';
-import 'package:cabeleileila/constants/enums/button_enums.dart';
-import 'package:cabeleileila/constants/enums/input_enums.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:cabeleileila/core/constants/colors/colors_constants.dart';
+import 'package:cabeleileila/core/constants/enums/button_enums.dart';
+import 'package:cabeleileila/core/constants/enums/input_enums.dart';
+import 'package:cabeleileila/core/widgets/buttonWidget/presentation/button_widget.dart';
+import 'package:cabeleileila/core/widgets/inputWidget/presentation/input_widget.dart';
 import 'package:cabeleileila/view/screens/logon/state/logon_state.dart';
-import 'package:cabeleileila/view/widgets/buttonWidget/presentation/button_widget.dart';
-import 'package:cabeleileila/view/widgets/inputWidget/presentation/input_widget.dart';
 import 'package:flutter/material.dart';
 
 class LogonScreen extends StatefulWidget {
@@ -17,8 +19,7 @@ class _LogonScreenState extends State<LogonScreen> {
   late LogonController _controller;
 
   final TextEditingController _controllerName = TextEditingController();
-  final TextEditingController _controllerContactNumber =
-      TextEditingController();
+  final TextEditingController _controllerContactNumber = TextEditingController();
   final TextEditingController _controllerUserName = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
@@ -37,9 +38,6 @@ class _LogonScreenState extends State<LogonScreen> {
       body: ValueListenableBuilder(
         valueListenable: _controller,
         builder: (context, value, child) {
-          if (value is ErrorLogonState) {}
-          if (value is LoadingLogonState) {}
-          if (value is SuccessLogonState) {}
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(
@@ -139,11 +137,35 @@ class _LogonScreenState extends State<LogonScreen> {
       text: "Cadastrar",
       styleType: ButtonStyleType.fill,
       color: ButtonColor.primary,
-      action: () => _controller.logon(
+      action: () => _controller
+          .logon(
         _controllerName.text,
         _controllerContactNumber.text,
         _controllerUserName.text,
         _controllerPassword.text,
+      )
+          .whenComplete(
+        () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Novo usuário"),
+                content: Text(
+                  "Você está cadastrado em nosso app.",
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("OK"),
+                  ),
+                ],
+              );
+            },
+          );
+        },
       ),
     );
   }

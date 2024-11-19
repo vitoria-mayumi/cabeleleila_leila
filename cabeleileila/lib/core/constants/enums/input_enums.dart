@@ -1,7 +1,8 @@
 enum InputType {
   password,
-  calendar,
+  date,
+  hour,
   string,
-  comment,
   number,
+  select,
 }

@@ -1,5 +1,5 @@
-import 'package:cabeleileila/model/users/users_model.dart';
-import 'package:cabeleileila/service/users/users_service.dart';
+import 'package:cabeleileila/core/model/users/users_model.dart';
+import 'package:cabeleileila/service/firestore/users/users_service.dart';
 import 'package:flutter/material.dart';
 
 abstract class LogonState {}
@@ -15,8 +15,7 @@ class SuccessLogonState extends LogonState {}
 class LogonController extends ValueNotifier<LogonState> {
   LogonController() : super(InitLogonState());
 
-  Future<void> logon(String name, String contactNumber, String userName,
-      String password) async {
+  Future<void> logon(String name, String contactNumber, String userName, String password) async {
     value = LoadingLogonState();
 
     try {

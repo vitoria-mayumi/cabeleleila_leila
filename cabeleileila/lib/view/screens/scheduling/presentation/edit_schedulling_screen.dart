@@ -5,27 +5,34 @@ import 'package:cabeleileila/core/constants/enums/button_enums.dart';
 import 'package:cabeleileila/core/constants/enums/input_enums.dart';
 import 'package:cabeleileila/core/widgets/buttonWidget/presentation/button_widget.dart';
 import 'package:cabeleileila/core/widgets/inputWidget/presentation/input_widget.dart';
-import 'package:cabeleileila/view/screens/scheduling/state/add_scheduling_state.dart';
+import 'package:cabeleileila/view/screens/home/state/home_state.dart';
+import 'package:cabeleileila/view/screens/scheduling/state/edit_scheduling_state.dart';
 import 'package:flutter/material.dart';
 
-class AddSchedulingScreen extends StatefulWidget {
-  const AddSchedulingScreen({super.key});
+class EditSchedulingScreen extends StatefulWidget {
+  final String serviceType;
+  final String dateTime;
+  final int id;
+
+  const EditSchedulingScreen({
+    super.key,
+    required this.serviceType,
+    required this.dateTime,
+    required this.id,
+  });
 
   @override
-  State<AddSchedulingScreen> createState() => _AddSchedulingScreenState();
+  State<EditSchedulingScreen> createState() => _EditSchedulingScreenState();
 }
 
-class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
-  late AddSchedulingController _controller;
-
-  final TextEditingController _controllerServiceType = TextEditingController();
-  final TextEditingController _controllerDate = TextEditingController();
-  final TextEditingController _controllerHour = TextEditingController();
+class _EditSchedulingScreenState extends State<EditSchedulingScreen> {
+  late EditSchedulingController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = AddSchedulingController();
+    _controller = EditSchedulingController();
+    _controller.initState(widget.dateTime, widget.serviceType);
   }
 
   @override
@@ -45,7 +52,7 @@ class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
               children: [
                 _title(),
                 _form(),
-                _buttonAdd(),
+                _buttonEdit(),
               ],
             ),
           ),
@@ -59,7 +66,7 @@ class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Novo agendamento",
+          "Editar agendamento",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
@@ -67,7 +74,7 @@ class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
           ),
         ),
         Text(
-          "Preencha os campos para realizar seu agendamento.",
+          "Preencha os campos para editar seu agendamento.",
           style: TextStyle(
             fontSize: 14,
             color: SystemColors.secondary,
@@ -82,9 +89,9 @@ class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InputWidget(
-          label: "Selecione o serviço desejado:",
+          label: "Serviço:",
           inputType: InputType.select,
-          controller: _controllerServiceType,
+          controller: _controller.controllerServiceType,
           itemsSelector: [
             'Corte',
             'Tratamento',
@@ -94,37 +101,38 @@ class _AddSchedulingScreenState extends State<AddSchedulingScreen> {
         ),
         SizedBox(height: 20),
         InputWidget(
-          label: "Selecione a melhor data para você:",
+          label: "Data:",
           inputType: InputType.date,
-          controller: _controllerDate,
-          verifySameWeek: true,
+          controller: _controller.controllerDate,
         ),
         SizedBox(height: 20),
         InputWidget(
-          label: "Selecione o melhor horário para ser atendido:",
+          label: "Hora:",
           inputType: InputType.hour,
-          controller: _controllerHour,
+          controller: _controller.controllerHour,
         ),
       ],
     );
   }
 
-  Widget _buttonAdd() {
+  Widget _buttonEdit() {
     return ButtonWidget(
-      text: "Realizar agendamento",
+      text: "Editar",
       styleType: ButtonStyleType.fill,
       color: ButtonColor.primary,
       startIcon: Icons.check_circle_outline,
       action: () async {
         _controller
-            .addScheduling(
-          _controllerServiceType.text,
-          _controllerDate.text,
-          _controllerHour.text,
+            .editScheduling(
+          _controller.controllerServiceType.text,
+          _controller.controllerDate.text,
+          _controller.controllerHour.text,
+          widget.id,
         )
             .whenComplete(() {
-          final addNewScheduling = true;
-          Navigator.pop(context, addNewScheduling);
+          final controllerHome = HomeController();
+          controllerHome.fetchList();
+          Navigator.pop(context);
         });
       },
     );

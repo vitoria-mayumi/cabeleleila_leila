@@ -1,4 +1,4 @@
-import 'package:cabeleileila/model/users/users_model.dart';
+import 'package:cabeleileila/core/model/users/users_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UsersService {
@@ -9,9 +9,7 @@ class UsersService {
   late final CollectionReference _usersReference;
 
   UsersService() {
-    _usersReference = _firestore.collection("users").withConverter<Users>(
-        fromFirestore: (snapshots, _) => Users.fromJson(snapshots.data()!),
-        toFirestore: (users, _) => users.toJson());
+    _usersReference = _firestore.collection("users").withConverter<Users>(fromFirestore: (snapshots, _) => Users.fromJson(snapshots.data()!), toFirestore: (users, _) => users.toJson());
   }
 
   Stream<QuerySnapshot> getAllUsers() {
@@ -31,18 +29,14 @@ class UsersService {
   }
 
   Future<int?> getLastId() async {
-    final query =
-        await _usersReference.orderBy('id', descending: true).limit(1).get();
+    final query = await _usersReference.orderBy('id', descending: true).limit(1).get();
 
     final lastUser = query.docs.first.data() as Users;
     return lastUser.id;
   }
 
   Future<bool> userAuthentication(String userName, String password) async {
-    final query = await _usersReference
-        .where('userName', isEqualTo: userName)
-        .where('password', isEqualTo: password)
-        .get();
+    final query = await _usersReference.where('userName', isEqualTo: userName).where('password', isEqualTo: password).get();
 
     return query.docs.isNotEmpty;
   }

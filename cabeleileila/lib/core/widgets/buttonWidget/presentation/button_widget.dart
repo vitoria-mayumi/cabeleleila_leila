@@ -1,5 +1,5 @@
-import 'package:cabeleileila/constants/colors/colors_constants.dart';
-import 'package:cabeleileila/constants/enums/button_enums.dart';
+import 'package:cabeleileila/core/constants/colors/colors_constants.dart';
+import 'package:cabeleileila/core/constants/enums/button_enums.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatefulWidget {

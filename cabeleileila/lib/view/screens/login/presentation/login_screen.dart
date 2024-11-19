@@ -1,9 +1,9 @@
-import 'package:cabeleileila/constants/colors/colors_constants.dart';
-import 'package:cabeleileila/constants/enums/button_enums.dart';
-import 'package:cabeleileila/constants/enums/input_enums.dart';
+import 'package:cabeleileila/core/constants/colors/colors_constants.dart';
+import 'package:cabeleileila/core/constants/enums/button_enums.dart';
+import 'package:cabeleileila/core/constants/enums/input_enums.dart';
+import 'package:cabeleileila/core/widgets/buttonWidget/presentation/button_widget.dart';
+import 'package:cabeleileila/core/widgets/inputWidget/presentation/input_widget.dart';
 import 'package:cabeleileila/view/screens/login/state/login_state.dart';
-import 'package:cabeleileila/view/widgets/buttonWidget/presentation/button_widget.dart';
-import 'package:cabeleileila/view/widgets/inputWidget/presentation/input_widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {

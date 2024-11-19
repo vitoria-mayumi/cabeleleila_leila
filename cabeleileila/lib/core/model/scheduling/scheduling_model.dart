@@ -2,7 +2,7 @@ class Scheduling {
   int? id;
   String serviceType;
   int userId;
-  DateTime dateTime;
+  String dateTime;
   String status;
 
   Scheduling({
