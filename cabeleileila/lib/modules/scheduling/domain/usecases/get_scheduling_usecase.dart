@@ -1,3 +1,4 @@
+import 'package:cabeleileila/modules/login/domain/entities/user.dart';
 import 'package:cabeleileila/modules/scheduling/domain/entities/scheduling.dart';
 import 'package:cabeleileila/modules/scheduling/domain/repositories/scheduling_repository.dart';
 
@@ -6,7 +7,7 @@ class GetScheduling {
 
   GetScheduling(this.repository);
 
-  Future<List<Scheduling>> call(int? userId) async {
-    return await repository.getSchedulings(userId);
+  Future<List<Scheduling>> call(User? user) async {
+    return await repository.getSchedulings(user);
   }
 }

@@ -34,7 +34,7 @@ class LoginController extends ValueNotifier<LoginState> {
         return;
       }
 
-      GlobalVariables().userId = result.id;
+      GlobalVariables().user = result;
 
       Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen()));
     } catch (e) {

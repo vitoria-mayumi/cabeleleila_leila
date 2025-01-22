@@ -147,6 +147,25 @@ class _LogonScreenState extends State<LogonScreen> {
             )
                 .whenComplete(() {
               Navigator.of(context).pop();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("Novo usuário"),
+                    content: Text(
+                      "Você está cadastrado em nosso app.",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("OK"),
+                      ),
+                    ],
+                  );
+                },
+              );
             }));
   }
 }

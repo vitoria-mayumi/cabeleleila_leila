@@ -27,7 +27,7 @@ class HomeController extends ValueNotifier<HomeState> {
     value = LoadingHomeState();
 
     try {
-      listData.value = getSchedulingUseCase(GlobalVariables().userId);
+      listData.value = getSchedulingUseCase(GlobalVariables().user!);
 
       return listData.value;
     } catch (e) {

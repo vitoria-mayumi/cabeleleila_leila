@@ -24,7 +24,7 @@ class AddSchedulingController extends ValueNotifier<AddSchedulingState> {
       Scheduling scheduling = Scheduling(
         serviceType: serviceType,
         status: "Aguardando confirmação",
-        idUser: GlobalVariables().userId!,
+        idUser: GlobalVariables().user!.id!,
         dateHour: '$date, $hour',
       );
 

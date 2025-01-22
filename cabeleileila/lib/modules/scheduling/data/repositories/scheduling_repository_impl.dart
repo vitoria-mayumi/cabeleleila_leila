@@ -1,4 +1,5 @@
 import 'package:cabeleileila/modules/login/data/datasources/sqlite_datasource.dart';
+import 'package:cabeleileila/modules/login/domain/entities/user.dart';
 import 'package:cabeleileila/modules/scheduling/data/models/scheduling_model.dart';
 
 import '../../domain/entities/scheduling.dart';
@@ -10,10 +11,10 @@ class SchedulingRepositoryImpl implements SchedulingRepository {
   SchedulingRepositoryImpl(this.datasource);
 
   @override
-  Future<List<Scheduling>> getSchedulings(int? userId) async {
+  Future<List<Scheduling>> getSchedulings(User? user) async {
     final db = await datasource.database;
 
-    if (userId == null) {
+    if (user!.userType == 'admin') {
       final result = await db.query('Scheduling');
 
       return result.map((map) => SchedulingModel.fromMap(map)).toList();
@@ -23,7 +24,7 @@ class SchedulingRepositoryImpl implements SchedulingRepository {
       'Scheduling',
       where: 'userId = ?',
       whereArgs: [
-        userId
+        user.id
       ],
     );
 

@@ -29,7 +29,7 @@ class EditSchedulingController extends ValueNotifier<EditSchedulingState> {
         id: id,
         serviceType: serviceType,
         status: status,
-        idUser: GlobalVariables().userId!,
+        idUser: GlobalVariables().user!.id!,
         dateHour: '$date, $hour',
       );
 

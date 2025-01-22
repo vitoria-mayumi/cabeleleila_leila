@@ -63,7 +63,7 @@ class InputWidgetController extends ValueNotifier<InputWidgetState> {
   }
 
   void verifySameWeek(BuildContext context, TextEditingController controller) async {
-    List<Scheduling> listData = await getSchedulingUseCase(GlobalVariables().userId);
+    List<Scheduling> listData = await getSchedulingUseCase(GlobalVariables().user!);
 
     DateTime? dateInTheSameWeek;
 

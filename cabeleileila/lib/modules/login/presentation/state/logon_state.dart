@@ -34,26 +34,6 @@ class LogonController extends ValueNotifier<LogonState> {
 
       await registerUserUseCase(user);
 
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Novo usuário"),
-            content: Text(
-              "Você está cadastrado em nosso app.",
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text("OK"),
-              ),
-            ],
-          );
-        },
-      );
-
       value = SuccessLogonState();
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

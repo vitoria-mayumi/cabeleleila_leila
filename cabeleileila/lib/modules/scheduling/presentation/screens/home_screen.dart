@@ -1,4 +1,5 @@
 import 'package:cabeleileila/core/colors/colors_system.dart';
+import 'package:cabeleileila/core/constants/global_variables.dart';
 import 'package:cabeleileila/core/enums/button_enums.dart';
 import 'package:cabeleileila/core/widgets/button/presentation/button_widget.dart';
 import 'package:cabeleileila/modules/scheduling/domain/entities/scheduling.dart';
@@ -30,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "Meus Agendamentos",
+          GlobalVariables().user!.userType == 'admin' ? "Agendamentos" : "Meus Agendamentos",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
@@ -46,23 +47,26 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: ButtonWidget(
-                  text: "Fazer novo agendamento",
-                  styleType: ButtonStyleType.fill,
-                  color: ButtonColor.primary,
-                  startIcon: Icons.add_circle_outline,
-                  action: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => AddSchedulingScreen()),
-                    ).then((value) {
-                      if (value == true) {
-                        _controller.fetchList();
-                      }
-                    });
-                  },
+              Visibility(
+                visible: GlobalVariables().user!.userType == 'user',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: ButtonWidget(
+                    text: "Fazer novo agendamento",
+                    styleType: ButtonStyleType.fill,
+                    color: ButtonColor.primary,
+                    startIcon: Icons.add_circle_outline,
+                    action: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddSchedulingScreen()),
+                      ).then((value) {
+                        if (value == true) {
+                          _controller.fetchList();
+                        }
+                      });
+                    },
+                  ),
                 ),
               ),
               ValueListenableBuilder(
